@@ -3,8 +3,7 @@ package com.driver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class MovieService {
@@ -13,41 +12,40 @@ public class MovieService {
     MovieRepository movieRepository;
 
     public void addMovie(Movie movie) {
-        movieRepository.saveMovie(movie);
+        movieRepository.AddMovieToDB(movie);
     }
+
 
     public void addDirector(Director director) {
-        movieRepository.saveDirector(director);
+        movieRepository.AddDirectorToDB(director);
     }
 
-    public void addMovieDirectorPair(String movie, String director) {
-        movieRepository.saveMovieDirectorPair(movie, director);
-
+    public void PairMAndD(String movieName, String directorName){
+        movieRepository.PairMovieAndDirectorToDB(movieName,directorName);
     }
 
-    public Movie getMovieByName(String movieName) {
-        return movieRepository.getMovieByName(movieName);
+    public Movie FindMovie(String name){
+        return movieRepository.findMovieInDB(name);
     }
 
-    public Director getDirectorByName(String name) {
-        return movieRepository.getDirectorByName(name);
-
+    public Director FindDirector(String name){
+        return movieRepository.findDirectorInDB(name);
     }
 
-    public List<String> getMoviesByDirectorName(String name) {
-        return movieRepository.getMoviesByDirectorName(name);
+    public List<String> getMoviesByDirector(String name){
+        return movieRepository.ListofMoviesInDBByDirector(name);
     }
 
-    public List<String> findAllMovies() {
-        return movieRepository.findAllMovies();
+    public List<String> findAllMovies(){
+        return movieRepository.findAllMoviesInDB();
     }
 
-    public void deleteDirector(String director) {
-        movieRepository.deleteDirector(director);
+    public void DeleteMovieByDirectorName(String name){
+        movieRepository.DeleteMovieFromDBbyName(name);
     }
 
-    public void deleteAllDirectors() {
-        movieRepository.deleteAllDirector();
+    public void DeleteAll(){
+        movieRepository.DeleteAllMappedInDB();
     }
 
 }
